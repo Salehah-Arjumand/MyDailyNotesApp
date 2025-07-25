@@ -1,0 +1,69 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Flask specific
+instance/
+.env
+*.env
+.env.*
+
+# Flask cache
+*.db
+*.sqlite3
+
+# PyInstaller
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+*.py,cover
+.cache
+nosetests.xml
+coverage/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.pip-selfcheck.json
+
+# Editor / IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# macOS / Linux / Windows
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Node.js (if you use npm for frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+
+# Frontend tools
+.cache/
+.parcel-cache/
+*.map
+
+# Misc
+*.swp

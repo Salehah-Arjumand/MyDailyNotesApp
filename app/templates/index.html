@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Daily Notes App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+</head>
+
+<body>
+  <header>
+    <h1>📝 My Daily Notes</h1>
+    <div class="controls">
+      <button id="darkModeToggle" class="dark-mode-toggle">🌙 Dark Mode</button>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Search Notes</h2>
+      <form method="get" action="{{ url_for('main.index') }}">
+        <input type="text" name="q" id="searchInput" placeholder="Search notes..."
+          value="{{ request.args.get('q', '') }}" />
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Create a New Note</h2>
+      <form action="{{ url_for('main.add_note') }}" method="post">
+        <input type="text" name="title" placeholder="Note Title" required />
+        <textarea name="content" rows="4" placeholder="Note Content" required></textarea>
+        <button type="submit">Add Note</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Your Notes</h2>
+
+      <!-- Table View -->
+      <table class="notes-table" id="notesTable">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Created At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for note in notes %}
+          <tr data-title="{{ note.title|lower }} {{ note.content|lower }}">
+            <td>{{ note.title }}</td>
+            <td>{{ note.content }}</td>
+            <td>{{ note.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>
+              <button onclick="toggleEditForm('{{ note.id }}')">Edit</button>
+
+              <form id="edit-form-{{ note.id }}" action="{{ url_for('main.edit_note', id=note.id) }}" method="post"
+                style="display: none; margin-top: 10px;">
+                <input type="text" name="title" value="{{ note.title }}" required />
+                <textarea name="content" rows="2" required>{{ note.content }}</textarea>
+                <button type="submit">Update</button>
+              </form>
+
+              <form action="{{ url_for('main.delete_note', id=note.id) }}" method="post">
+                <button type="submit" class="delete">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
