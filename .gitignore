@@ -16,18 +16,6 @@ instance/
 # PyInstaller
 *.spec
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-coverage.xml
-*.cover
-*.py,cover
-.cache
-nosetests.xml
-coverage/
-
 # Virtual environments
 venv/
 env/
@@ -49,12 +37,6 @@ Desktop.ini
 
 # Logs
 *.log
-
-# Node.js (if you use npm for frontend)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Build output
 dist/
